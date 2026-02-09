@@ -32,4 +32,12 @@ public class Main{
     public void setFeelsLike(double feelsLike) {
         this.feelsLike = feelsLike;
     }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
 }
