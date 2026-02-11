@@ -1,4 +1,6 @@
-package ru.top.openweathermap21.model;
+package ru.top.openweathermap21.utils;
+
+import ru.top.openweathermap21.model.WeatherApiResponse;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
