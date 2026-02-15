@@ -1,5 +1,6 @@
 package ru.top.openweathermap21.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,11 @@ import ru.top.openweathermap21.services.WeatherApiServices;
 @RequestMapping("/api/weather")
 public class WeatherController {
 
-    WeatherApiServices weatherApiServices = new WeatherApiServices();
+    WeatherApiServices weatherApiServices;
+    @Autowired
+    public WeatherController(WeatherApiServices weatherApiServices) {
+        this.weatherApiServices = weatherApiServices;
+    }
 
     @GetMapping("/search/{city}")
     public ResponseEntity<?> search (@PathVariable String city) {

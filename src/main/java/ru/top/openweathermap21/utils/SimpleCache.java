@@ -1,14 +1,16 @@
 package ru.top.openweathermap21.utils;
 
+import org.springframework.stereotype.Component;
 import ru.top.openweathermap21.model.WeatherApiResponse;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class SimpleCache {
     Map<String , CacheData> cache =  new ConcurrentHashMap<>();
     private  long timeToLive;
-    public SimpleCache(long timeToLive) {
+    public SimpleCache() {
         this.timeToLive = timeToLive;
     }
     public void putWeather(String key, WeatherApiResponse data) {

@@ -1,16 +1,24 @@
 package ru.top.openweathermap21.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import ru.top.openweathermap21.model.WeatherApiResponse;
 import ru.top.openweathermap21.utils.RestUtils;
 import ru.top.openweathermap21.utils.SimpleCache;
 
-
+@Service
 public class WeatherApiServices {
 
-    SimpleCache cache = new SimpleCache(60 * 1000);
-    RestUtils restUtils = new RestUtils();
+    private final SimpleCache cache;
+    private final RestUtils restUtils;
+
+    @Autowired
+    public WeatherApiServices(SimpleCache cache, RestUtils restUtils) {
+        this.cache = cache;
+        this.restUtils = restUtils;
+    }
 
     public ResponseEntity<?> search(String city) {
         city = city.toLowerCase();
