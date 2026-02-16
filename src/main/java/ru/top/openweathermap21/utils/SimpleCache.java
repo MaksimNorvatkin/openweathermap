@@ -8,32 +8,37 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class SimpleCache {
-    Map<String , CacheData> cache =  new ConcurrentHashMap<>();
-    private  long timeToLive;
+    Map<String, CacheData> cache = new ConcurrentHashMap<>();
+    private long timeToLive;
+
     public SimpleCache() {
-        this.timeToLive = timeToLive;
+        this.timeToLive = 5 * 60 * 1000;
     }
+
     public void putWeather(String key, WeatherApiResponse data) {
         cache.put(key, new CacheData(data));
     }
+
     public WeatherApiResponse getWeather(String key) {
         CacheData cacheData = cache.get(key);
         if (cacheData == null)
             return null;
         if (cacheData.isExpired()) {
             cache.remove(key);
-            return  null;
+            return null;
         }
         return cacheData.data;
     }
+
     public int size() {
         return cache.size();
     }
-    public  void clear() {
+
+    public void clear() {
         cache.clear();
     }
 
-    public class CacheData{
+    public class CacheData {
         long time;
         WeatherApiResponse data;
 
@@ -42,7 +47,7 @@ public class SimpleCache {
             this.time = System.currentTimeMillis();
         }
 
-        public boolean isExpired(){
+        public boolean isExpired() {
             return (System.currentTimeMillis() - this.time) > timeToLive;
         }
     }

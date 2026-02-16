@@ -2,6 +2,7 @@ package ru.top.openweathermap21.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import ru.top.openweathermap21.model.WeatherApiResponse;
@@ -14,9 +15,11 @@ public class RestUtils {
     @Autowired
     @Qualifier("restTemplateL")
     RestTemplate restTemplate;
+    @Value("${weather.api.url}")
+    String baseUrl;
+    @Value("${weather.api.key}")
+    String apiKey;
 
-    String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
-    String apiKey ="54e888a2765b07ff1b6acffb64223e4b";
     public WeatherApiResponse getWeatherData(String city) {
         String url = baseUrl + "?q="
                 + city + "&appid="+apiKey+"&units=metric";
